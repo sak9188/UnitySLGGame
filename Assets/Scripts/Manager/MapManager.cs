@@ -74,12 +74,10 @@ namespace Assets.Scripts.Manager
                 mapDict.Add(map.md5, new Md5Map(map.name, map));
                 LoadCellList(map.md5);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 Debug.LogWarning(string.Format("MapDict 重复的键值对{}-{}", map.md5, map.name));
             }
-            // 读取配置
-            //GenerateMap(GC, map);
         }
 
         public void LoadCellList(string md5)
@@ -98,7 +96,7 @@ namespace Assets.Scripts.Manager
             {
                 cellListDict.Add(list.md5, new Md5CellList(list.name, list));
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 Debug.LogWarning(string.Format("CellListDict 重复的键值对{}-{}", list.md5, list.name));
             }
@@ -109,7 +107,11 @@ namespace Assets.Scripts.Manager
             if (IsEmpty.Empty(gc))
                 Debug.LogWarning("生成地图失败 没有Console");
 
-            
+            MapView mv = new MapView();
+            mv.Height = map.height;
+            mv.Width = map.width;
+
+            gc.GenerateMap(mv);
         }
     }
 }

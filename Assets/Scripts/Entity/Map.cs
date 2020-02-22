@@ -11,3 +11,11 @@ public class Map : AJson
     public int cell_size; // 以像素作为单位所以没有float
     public Dictionary<int, string> content;
 }
+
+public class MapView
+{
+    public int Width;
+    public int Height;
+    public int CellSize;
+    public IList<Cell> CellList;
+}
