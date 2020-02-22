@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public interface IJson
+public abstract class AJson
 {
 }
