@@ -112,7 +112,7 @@ namespace Assets.Scripts.Manager
             mv.Height = map.height;
             mv.Width = map.width;
             mv.CellList = GetCellListByMap(map);
-            gc.GenerateMap(mv);
+            gc.GenerateScene(mv);
         }
 
         public IList<Cell> GetCellListByMap(Map map)

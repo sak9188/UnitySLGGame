@@ -40,5 +40,9 @@ namespace Assets.Scripts.Manager
         {
         }
 
+        public void GenerateScene(MapView mv)
+        {
+
+        }
     }
 }

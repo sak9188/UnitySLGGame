@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Manager
 {
-    public class GameConsole
+    public class ObjcetPoolManager
     {
         #region 单例
-        private static GameConsole instance = null;
+        public static GameConsole GC = null;
+        private static ObjcetPoolManager instance = null;
         private static readonly object padlock = new object();
 
-        private GameConsole()
+        private ObjcetPoolManager()
         {
+            Init();
         }
 
-        public static GameConsole Instance()
+        public static ObjcetPoolManager Instance(GameConsole gc = null)
         {
             if (instance == null)
             {
@@ -25,37 +27,18 @@ namespace Assets.Scripts.Manager
                     // 如果类的实例不存在则创建，否则直接返回
                     if (instance == null)
                     {
-                        instance = new GameConsole();
+                        instance = new ObjcetPoolManager();
+                        GC = gc;
                     }
                 }
             }
             return instance;
         }
-        # endregion
-
-        private MapManager MM;
-        private SceneManager SM;
+        #endregion
 
         private void Init()
         {
-            MM = MapManager.Instance(this);
-            SM = SceneManager.Instance(this);
-        }
 
-        public void StartGame()
-        {
-
-        }
-
-        public void EndGame()
-        {
-
-        }
-
-        internal void GenerateScene(MapView mv)
-        {
-
-            throw new NotImplementedException();
         }
     }
 }
