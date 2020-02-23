@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Assets.Scripts.ConfigReader.MapReader;
 
 using Md5Map = System.Tuple<string, Map>;
 using Md5CellList = System.Tuple<string, CellList>;
-using Assets.Scripts.ConfigReader.MapReader;
 
 namespace Assets.Scripts.Manager
 {
@@ -19,6 +19,7 @@ namespace Assets.Scripts.Manager
     public class MapManager
     {
         #region 单例
+        public static GameConsole GC = null;
         private static MapManager instance = null;
         private static readonly object padlock = new object();
 
@@ -27,7 +28,7 @@ namespace Assets.Scripts.Manager
             Init();
         }
 
-        public static MapManager Instance()
+        public static MapManager Instance(GameConsole gc = null)
         {
             if (instance == null)
             {
@@ -37,6 +38,7 @@ namespace Assets.Scripts.Manager
                     if (instance == null)
                     {
                         instance = new MapManager();
+                        GC = gc;
                     }
                 }
             }
@@ -44,7 +46,6 @@ namespace Assets.Scripts.Manager
         }
         # endregion
 
-        public static GameConsole GC = null;
 
         // 存储Map的相关数值
         private IDictionary<string, Md5Map> mapDict;
@@ -102,7 +103,7 @@ namespace Assets.Scripts.Manager
             }
         }
 
-        private void GenerateMap(GameConsole gc, Map map)
+        public void GenerateMap(GameConsole gc, Map map)
         {
             if (IsEmpty.Empty(gc))
                 Debug.LogWarning("生成地图失败 没有Console");
@@ -110,8 +111,27 @@ namespace Assets.Scripts.Manager
             MapView mv = new MapView();
             mv.Height = map.height;
             mv.Width = map.width;
-
+            mv.CellList = GetCellListByMap(map);
             gc.GenerateMap(mv);
+        }
+
+        public IList<Cell> GetCellListByMap(Map map)
+        {
+            Dictionary<int, string> content = map.content;
+            var cellTuple = cellListDict[map.md5];
+            var clist = cellTuple.Item2;
+            List<Cell> retrunList = new List<Cell>();
+            foreach (int key in content.Keys)
+            {
+                string val = content[key];
+                string[] vals = val.Split(' ');
+                int[] nums = Array.ConvertAll(vals, int.Parse);
+                foreach (int idx in nums)
+                {
+                    retrunList.Add(clist.list[idx]);
+                }
+            }
+            return retrunList;
         }
     }
 }

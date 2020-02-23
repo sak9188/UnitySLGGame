@@ -33,6 +33,15 @@ namespace Assets.Scripts.Manager
         }
         # endregion
 
+        private MapManager MM;
+        private SceneManager SM;
+
+        private void Init()
+        {
+            MM = MapManager.Instance(this);
+            SM = SceneManager.Instance(this);
+        }
+
         public void StartGame()
         {
 
@@ -41,6 +50,11 @@ namespace Assets.Scripts.Manager
         public void EndGame()
         {
 
+        }
+
+        internal void GenerateMap(MapView mv)
+        {
+            throw new NotImplementedException();
         }
     }
 }
