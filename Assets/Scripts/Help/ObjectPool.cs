@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace Assets.Scripts.Help
         // 最大容量
         private int maxCount;
 
-        protected const int defaultMaxCount = 10;
+        protected int defaultMaxCount = 10;
 
         public GameObject Prefab { get; set; }
 

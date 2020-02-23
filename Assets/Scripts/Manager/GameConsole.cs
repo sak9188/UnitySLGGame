@@ -33,6 +33,7 @@ namespace Assets.Scripts.Manager
         }
         # endregion
 
+        private ObjcetPoolManager OPM;
         private MapManager MM;
         private SceneManager SM;
 
@@ -40,6 +41,7 @@ namespace Assets.Scripts.Manager
         {
             MM = MapManager.Instance(this);
             SM = SceneManager.Instance(this);
+            OPM = ObjcetPoolManager.Instance(this);
         }
 
         public void StartGame()
