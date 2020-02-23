@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Assets.Scripts.Help;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Manager
 {
@@ -54,10 +56,16 @@ namespace Assets.Scripts.Manager
 
         }
 
+        public void CreateObjectPool<T>(string poolName) where T : ObjectPool, new()
+        {
+            var pool = OPM.CreateObjectPool<T>(poolName);
+            if (IsEmpty.Empty(pool))
+                Debug.LogErrorFormat("创建对象池{0}失败", poolName);
+        }
+
         internal void GenerateScene(MapView mv)
         {
-
-            throw new NotImplementedException();
+            SM.GenerateScene(mv, OPM);            
         }
     }
 }

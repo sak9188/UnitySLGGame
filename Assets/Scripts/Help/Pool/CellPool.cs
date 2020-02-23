@@ -8,7 +8,7 @@ namespace Assets.Scripts.Help.Pool
 {
     public class CellPool : ObjectPool
     {
-        CellPool()
+        public CellPool()
         {
             defaultMaxCount = 100;
         }

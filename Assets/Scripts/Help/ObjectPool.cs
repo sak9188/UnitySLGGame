@@ -101,7 +101,5 @@ namespace Assets.Scripts.Help
         {
             poolQueue.Clear();
         }
-
-
     }
 }

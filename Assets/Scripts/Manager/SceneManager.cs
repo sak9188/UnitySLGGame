@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Assets.Scripts.Help.Pool;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Manager
 {
@@ -29,6 +31,7 @@ namespace Assets.Scripts.Manager
                     {
                         instance = new SceneManager();
                         GC = gc;
+                        AfterInitGC();
                     }
                 }
             }
@@ -36,13 +39,22 @@ namespace Assets.Scripts.Manager
         }
         #endregion
 
+        private static readonly string CELL_POOL = "CellPool";
+
         private void Init()
         {
         }
 
-        public void GenerateScene(MapView mv)
+        private static void AfterInitGC()
         {
+            // CELL pool
+            GC.CreateObjectPool<CellPool>(CELL_POOL);
+        }
 
+        internal void GenerateScene(MapView mv, ObjcetPoolManager OPM)
+        {
+            Vector3 lp = mv.LeftTopPoint;
+            // OPM.GetGameObject(CELL_POOL, );
         }
     }
 }
